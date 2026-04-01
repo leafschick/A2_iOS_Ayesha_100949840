@@ -127,7 +127,25 @@ struct ContentView: View {
                 }
                     Spacer()
             }
-            .navigationTitle("Home")
+                        .navigationTitle("Home")
+                        .onAppear {
+                            refreshCurrentIndex()
+                        }
+                        .onChange(of: products.count) {
+                            if !products.isEmpty {
+                                currentIndex = products.count - 1
+                            } else {
+                                currentIndex = 0
+                            }
+                        }
+                    }
+                }
+    
+    private func refreshCurrentIndex() {
+        if products.isEmpty {
+            currentIndex = 0
+        } else if currentIndex >= products.count {
+            currentIndex = 0
         }
     }
 }

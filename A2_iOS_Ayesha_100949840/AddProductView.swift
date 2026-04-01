@@ -45,7 +45,8 @@ struct AddProductView: View {
 
     private func saveProduct() {
         let newProduct = Product(context: viewContext)
-        newProduct.productId = Int64(products.count + 1)
+        let nextId = (products.last?.productId ?? 0) + 1
+        newProduct.productId = nextId
         newProduct.productName = productName
         newProduct.productDescription = productDescription
         newProduct.productPrice = Double(productPrice) ?? 0.0
