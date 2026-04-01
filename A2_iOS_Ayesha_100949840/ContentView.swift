@@ -99,7 +99,8 @@ struct ContentView: View {
                         .disabled(currentIndex >= products.count - 1)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 5)
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
                     
                 } else {
                     Text("No products available.")
