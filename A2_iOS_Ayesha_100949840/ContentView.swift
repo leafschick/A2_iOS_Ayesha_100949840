@@ -21,12 +21,14 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
+                
+                Spacer().frame(height: 30)
                 Text("Starbucks")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .font(Font.largeTitle.weight(.bold))
                     .foregroundColor(.black)
-                    .padding()
+                    
                 
                 
 
@@ -98,7 +100,7 @@ struct ContentView: View {
                         .foregroundColor(currentIndex > 0 ? .black : .gray)
                         .disabled(currentIndex == 0)
 
-                        Spacer()
+                        Spacer().frame(height:30)
 
                         // NEXT
                         Button(action: {
