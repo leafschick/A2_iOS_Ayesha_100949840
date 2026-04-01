@@ -127,7 +127,7 @@ struct ContentView: View {
                 }
                     Spacer()
             }
-                        .navigationTitle("Home")
+                        .navigationBarHidden(true)
                         .onAppear {
                             refreshCurrentIndex()
                         }
