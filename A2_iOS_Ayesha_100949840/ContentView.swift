@@ -16,6 +16,8 @@ struct ContentView: View {
            sortDescriptors: [NSSortDescriptor(key: "productId", ascending: true)]
        ) private var products: FetchedResults<Product>
     
+    @State private var currentIndex: Int = 0
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
@@ -37,22 +39,38 @@ struct ContentView: View {
                 Divider()
                     .padding(.horizontal)
                 
-                if let firstProduct = products.first {
-                    Text (firstProduct.productName ?? "No Name")
+                if products.indices.contains(currentIndex) {
+                    let product = products[currentIndex]
+                    Text (product.productName ?? "No Name")
                         .font(.title2)
                         .fontWeight(.semibold)
                 
                     
-                    Text(firstProduct.productDescription ?? "No Description")
+                    Text(product.productDescription ?? "No Description")
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
-                    Text("Price: $\(firstProduct.productPrice, specifier: "%.2f")")
+                    Text("Price: $\(product.productPrice, specifier: "%.2f")")
                         .font(.headline)
                     
-                    Text("Provider: \(firstProduct.productProvider ?? "No Provider")")
+                    Text("Provider: \(product.productProvider ?? "No Provider")")
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                    
+                    Button(action: {
+                        if currentIndex < products.count - 1 {
+                            currentIndex += 1
+                        }
+                    }) {
+                        Text("Next")
+                            .fontWeight(.semibold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal)
                     
                 } else {
                     Text("No products available.")
