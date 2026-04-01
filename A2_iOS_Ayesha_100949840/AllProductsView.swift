@@ -31,8 +31,11 @@ struct AllProductsView: View {
     var body: some View {
         VStack {
             TextField("Search by product name", text: $searchText)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .background(Color.gray.opacity(0.2))   
+                .cornerRadius(10)
                 .padding(.horizontal)
+            
             List {
                 ForEach(filteredProducts, id: \.objectID) { product in
                     VStack(alignment: .leading, spacing: 6) {
