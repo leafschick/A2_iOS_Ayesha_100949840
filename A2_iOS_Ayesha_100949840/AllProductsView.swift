@@ -15,27 +15,44 @@ struct AllProductsView: View {
         sortDescriptors: [NSSortDescriptor(key: "productId", ascending: true)]
     ) private var products: FetchedResults<Product>
     
+    @State private var searchText = ""
+    
+    var filteredProducts: [Product] {
+        if searchText.isEmpty {
+            return Array(products)
+        } else {
+            return products.filter {
+                ($0.productName ?? "").localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
     var body: some View {
-        List {
-            ForEach(products, id: \.objectID) { product in
-                VStack(alignment: .leading, spacing: 6) {
-                    
-                    Text(product.productName ?? "No Name")
-                        .font(.headline)
-                    
-                    Text(product.productDescription ?? "No Description")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                    
-                    Text("Price: $\(product.productPrice, specifier: "%.2f")")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                    
-                    Text("Provider: \(product.productProvider ?? "Unknown")")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+        VStack {
+            TextField("Search by product name", text: $searchText)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding(.horizontal)
+            List {
+                ForEach(filteredProducts, id: \.objectID) { product in
+                    VStack(alignment: .leading, spacing: 6) {
+                        
+                        Text(product.productName ?? "No Name")
+                            .font(.headline)
+                        
+                        Text(product.productDescription ?? "No Description")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                        Text("Price: $\(product.productPrice, specifier: "%.2f")")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                        
+                        Text("Provider: \(product.productProvider ?? "Unknown")")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.vertical, 4)
                 }
-                .padding(.vertical, 4)
             }
         }
         .navigationTitle("All Products")
