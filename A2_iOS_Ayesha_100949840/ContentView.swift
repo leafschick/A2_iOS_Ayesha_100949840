@@ -29,7 +29,7 @@ struct ContentView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                 
-                Text("This is an instore app for Starbucks managers to view products and add more products.")
+                Text("This is an instore app for Starbucks to view products and add more products.")
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
