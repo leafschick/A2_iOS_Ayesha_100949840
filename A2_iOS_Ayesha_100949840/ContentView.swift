@@ -57,20 +57,46 @@ struct ContentView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                     
-                    Button(action: {
-                        if currentIndex < products.count - 1 {
-                            currentIndex += 1
+                    HStack {
+                        
+                        // PREVIOUS
+                        Button(action: {
+                            if currentIndex > 0 {
+                                currentIndex -= 1
+                            }
+                        }) {
+                            Text("Previous")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 8)
+                                .background(Color.gray.opacity(0.15))
+                                .clipShape(Capsule())
                         }
-                    }) {
-                        Text("Next")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                        .foregroundColor(currentIndex > 0 ? .black : .gray)
+                        .disabled(currentIndex == 0)
+
+                        Spacer()
+
+                        // NEXT
+                        Button(action: {
+                            if currentIndex < products.count - 1 {
+                                currentIndex += 1
+                            }
+                        }) {
+                            Text("Next")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .padding(.horizontal, 18)
+                                .padding(.vertical, 8)
+                                .background(Color.blue.opacity(0.2))
+                                .clipShape(Capsule())
+                        }
+                        .foregroundColor(currentIndex < products.count - 1 ? .green : .gray)
+                        .disabled(currentIndex >= products.count - 1)
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 30)
+                    .padding(.top, 25)
                     
                 } else {
                     Text("No products available.")
