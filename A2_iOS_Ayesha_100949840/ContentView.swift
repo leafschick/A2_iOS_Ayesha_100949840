@@ -47,6 +47,17 @@ struct ContentView: View {
                 }
                 .padding(.horizontal)
                 
+                NavigationLink(destination: AddProductView()) {
+                    Text("Add Product")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
                 Divider()
                     .padding(.horizontal)
                 
